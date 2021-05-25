@@ -5,3 +5,5 @@ from prettytable import PrettyTable
 from models.alumnos import Alumno
 from models.profesor import Profesor
 from models.cursos import Cursos
+from models.grado import Grado
+from models.nivel import Nivel

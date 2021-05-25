@@ -17,7 +17,9 @@ class Reformatorio():
                 2) Ver Docentes
                 3) Administrar Cursos
                 4) Agregar Notas
-                5) Salir\n
+                5) Agregar Grado
+                6) Agregar Nivel
+                7) Salir\n
             ''')
             opcion = input("> ")
             if opcion == "1":
@@ -29,8 +31,14 @@ class Reformatorio():
                 self.view_cursos()
             if opcion == "4":
                 self.add_notas()
+            if opcion == "5":
+                self.view_grado()
+            if opcion == "6":
+                self.view_nivel()
             else:
                 self.salir()
+
+# ALUMNO
 
     def view_alumno(self):
         while True:
@@ -119,6 +127,8 @@ class Reformatorio():
         delete = Cursos(id, '')
         delete.delete_cursos()
 
+# PROFESOR
+
     def view_profesor(self):
         while True:
             print('''
@@ -194,6 +204,8 @@ class Reformatorio():
         delete = Profesor(id)
         delete.delete_profesores()
 
+# CURSOS
+
     def choose_cursos(self):
         Cursos.all_cursos("xx")
         print('''ESCRIBIR EL NOMBRE DEL CURSO A MODIFICAR:''')
@@ -246,6 +258,111 @@ class Reformatorio():
         
         delete = Cursos(id, '')
         delete.delete_cursos()
+
+# GRADO
+
+    def choose_grado(self):
+        Grado.all_grado("xx")
+        print('''ESCRIBIR EL NOMBRE DEL GRADO A MODIFICAR:''')
+    
+    def view_grado(self):
+        while True:
+            print('''
+                Escoga una opción:
+                1) Crear Nuevo
+                2) Modificar Curso
+                3) Eliminar Curso
+                4) Regresar
+                5) Salir\n
+            ''')
+            opcion = input("> ")
+            if opcion == "1":
+                self.add_grado()
+            elif opcion == "2":
+                self.data_update_grado()
+            elif opcion == "3":
+                self.data_delete_grado()
+            elif opcion == "4":
+                self.view_principal()
+            else:
+                self.salir()
+
+    def add_grado(self):
+        print(''' INGRESAR NUEVO GRADO:''')
+        nombre = input("> ")
+        
+        insert = Grado('', nombre)
+        insert.insert_grado()    
+
+    def data_update_grado(self):
+        self.choose_grado()
+        id = input("> ")
+
+        print(''' INGRESAR EL NUEVO NOMBRE DEL GRADO:''')
+        nombre = input("> ")
+
+        update = Grado(id, nombre)
+        update.update_grado()
+
+    def data_delete_grado(self):
+        self.choose_grado()
+        id = input("> ")
+        
+        delete = Grado(id, '')
+        delete.delete_grado()
+
+# NIVEL
+
+    def choose_nivel(self):
+        Nivel.all_nivel("xx")
+        print('''ESCRIBIR EL NOMBRE DEL NIVEL A MODIFICAR:''')
+    
+    def view_nivel(self):
+        while True:
+            print('''
+                Escoga una opción:
+                1) Crear Nuevo
+                2) Modificar Curso
+                3) Eliminar Curso
+                4) Regresar
+                5) Salir\n
+            ''')
+            opcion = input("> ")
+            if opcion == "1":
+                self.add_nivel()
+            elif opcion == "2":
+                self.data_update_nivel()
+            elif opcion == "3":
+                self.data_delete_nivel()
+            elif opcion == "4":
+                self.view_principal()
+            else:
+                self.salir()
+
+    def add_nivel(self):
+        print(''' INGRESAR NUEVO nivel:''')
+        nombre = input("> ")
+        
+        insert = Nivel('', nombre)
+        insert.insert_nivel()    
+
+    def data_update_nivel(self):
+        self.choose_nivel()
+        id = input("> ")
+
+        print(''' INGRESAR EL NUEVO NOMBRE DEL nivel:''')
+        nombre = input("> ")
+
+        update = Nivel(id, nombre)
+        update.update_nivel()
+
+    def data_delete_nivel(self):
+        self.choose_nivel()
+        id = input("> ")
+        
+        delete = Nivel(id, '')
+        delete.delete_nivel()
+
 
     def salir(self):
         print(''' \\\ CERRADO ///''')
