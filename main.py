@@ -119,8 +119,85 @@ class Reformatorio():
         delete = Cursos(id, '')
         delete.delete_cursos()
 
+    def view_profesor(self):
+        while True:
+            print('''
+                Escoga una opción:
+                1) Crear Nuevo Profesor
+                2) Lista de Profesores
+                3) Profesores por curso
+                4) Modificar Profesor
+                5) Eliminar Profesor
+                6) Regresar
+                7) Salir\n
+            ''')
+            opcion = input("> ")
+            if opcion == "1":
+                self.data_insert_profesor()
+            elif opcion == "2":
+                # self.datos_salon()
+                Profesor.all_profesores("xx")
+                #sleep(1)
+                pass
+            elif opcion == "3":
+                Profesor.list_prof_x_curso("xx")
+            elif opcion == "4":
+                self.data_update_profesor()
+            elif opcion == "5":
+                self.data_delete_profesor()
+            elif opcion == "6":
+                self.view_principal()
+            else:
+                self.salir()
+
+    def data_insert_profesor(self):
+        print(''' INGRESAR DATOS DEL PROFESOR:''')
+        print(''' NOMBRES: ''')
+        nombre = input("> ")
+        print(''' DNI: ''')
+        dni = input("> ")
+        print(''' EDAD: ''')
+        edad = input("> ")
+        print(''' CORREO: ''')
+        correo = input("> ")
+        
+        insert = Profesor('', nombre, dni, edad, correo)
+        insert.insert_profesores()
+    
+    def choose_profesor(self):
+        Profesor.list_all_profesores("xx")
+        print('''ESCOGER ID DEL PROFESOR:''')
+
+    def data_update_profesor(self):
+        self.choose_profesor()
+        id = input("> ")
+
+        print(''' INGRESAR DATOS DEL PROPFESOR:''')
+        print(''' NOMBRES: ''')
+        nombre = input("> ")
+        print(''' DNI: ''')
+        dni = input("> ")       
+        print(''' EDAD: ''')
+        edad = input("> ")
+        print(''' CORREO: ''')
+        correo = input("> ")
+        print(''' DNI: ''')
+        dni = input("> ")
+
+        update = Profesor(id, nombre, dni, edad, correo)
+        update.update_profesor()
+
+    def data_delete_profesor(self):
+        self.choose_profesor()
+        id = input("> ")
+        
+        delete = Profesor(id)
+        delete.delete_profesores()
+
     def salir(self):
         print(''' \\\ CERRADO ///''')
         exit()
+
+
 
 Reformatorio()
