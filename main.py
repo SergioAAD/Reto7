@@ -81,7 +81,7 @@ class Reformatorio():
     
     def choose_alumno(self):
         Alumno.list_all_alumnos("xx")
-        print('''ESCOGER ID DE ALUMNOS:''')
+        print('''ESCRIBIR NOMBRE DE ALUMNO PAR ELIMINAR:''')
 
     def data_update_alumno(self):
         self.choose_alumno()
@@ -108,9 +108,9 @@ class Reformatorio():
 
     def data_delete_alumnos(self):
         self.choose_alumno()
-        id = input("> ")
+        nombres = input("> ")
         
-        delete = Alumno(id)
+        delete = Alumno(nombres)
         delete.delete_alumnos()
 
         self.choose_cursos()
