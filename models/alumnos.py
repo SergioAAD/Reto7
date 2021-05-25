@@ -11,27 +11,6 @@ class Alumno:
         self.dni = dni
         self.salon_id = salon_id
 
-    def create_table(self):
-        try:
-            conn = Connection()
-            query = '''
-                CREATE TABLE IF NOT EXISTS alumnos(
-                    id SERIAL PRIMARY KEY NOT NULL,
-                    nombres character varying(50) NOT NULL,
-                    codigo_alumno integer NOT NULL,
-                    edad character varying(2) NOT NULL,
-                    correo character varying(35) NOT NULL,
-                    celular character varying(9) NOT NULL,
-                    dni character varying(8) NOT NULL,
-                    salon_id integer NOT NULL,
-                );
-            '''
-            conn.execute_query(query)
-            conn.commit()
-        except Exception as e:
-            conn.rollback()
-            print(e)
-
     def all_alumnos(self):
         try:
             conn = Connection('reformatorio')

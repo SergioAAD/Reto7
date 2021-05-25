@@ -194,6 +194,59 @@ class Reformatorio():
         delete = Profesor(id)
         delete.delete_profesores()
 
+    def choose_cursos(self):
+        Cursos.all_cursos("xx")
+        print('''ESCRIBIR EL NOMBRE DEL CURSO A MODIFICAR:''')
+    
+    def view_cursos(self):
+        while True:
+            print('''
+                Escoga una opción:
+                1) Crear Nuevo
+                2) Agregar Profesores por curso
+                3) Modificar Curso
+                4) Eliminar Curso
+                5) Regresar
+                6) Salir\n
+            ''')
+            opcion = input("> ")
+            if opcion == "1":
+                self.add_cursos()
+            elif opcion == "2":
+                self.data_cursos_profesor()
+            elif opcion == "3":
+                self.data_update_cursos()
+            elif opcion == "4":
+                self.data_delete_cursos()
+            elif opcion == "5":
+                self.view_principal()
+            else:
+                self.salir()
+
+    def add_cursos(self):
+        print(''' INGRESAR NUEVO CURSO:''')
+        nombre = input("> ")
+        
+        insert = Cursos('', nombre)
+        insert.insert_cursos()    
+
+    def data_update_cursos(self):
+        self.choose_cursos()
+        id = input("> ")
+
+        print(''' INGRESAR EL NUEVO NOMBRE DEL CURSO:''')
+        nombre = input("> ")
+
+        update = Cursos(id, nombre)
+        update.update_cursos()
+
+    def data_delete_cursos(self):
+        self.choose_cursos()
+        id = input("> ")
+        
+        delete = Cursos(id, '')
+        delete.delete_cursos()
+
     def salir(self):
         print(''' \\\ CERRADO ///''')
         exit()
