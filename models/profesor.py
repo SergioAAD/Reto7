@@ -29,16 +29,15 @@ class Profesor:
     def all_profesores(self):
         try:
             conn = Connection('reformatorio')
-            records = conn.get_all('profesores')
+            data = conn.get_all('profesores')
             
             p = PrettyTable()
             print("-- LISTA DE PROFESORES --".center(50))
             p.field_names = ["ID", "Nombres", "Dni", "Edad", "Correo"]
 
-            for record in records:
+            for record in data:
                 p.add_row([record["_id"], record["nombre"], record["dni"], record["edad"], record["correo"]])
             print(p)
-
         except Exception as e:
             print(e)
 
