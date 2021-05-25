@@ -9,9 +9,13 @@ class Connection:
     # collection = usuarios
     # condition => { id: { $eq: 1 }, rol_id: { $gt: 1 } }
     # select => { id: 1, nombre: 1 }
-    def get_all(self, collection, condition={}, select={}):
+    def get_all_select(self, collection, condition={}, select={}):
         collect = self.db[collection]
         return collect.find(condition, select)
+    
+    def get_all(self, collection, condition={}):
+        collect = self.db[collection]
+        return collect.find(condition) # SELECT * FROM collection
 
     def get_one(self, collection, condition={}, select={}):
         collect = self.db[collection]

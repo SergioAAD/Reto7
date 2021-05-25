@@ -34,28 +34,30 @@ class Alumno:
 
     def all_alumnos(self):
         try:
-            conn = Connection('alumnos')
-            records = conn.select([])
+            conn = Connection('reformatorio')
+            data = conn.get_all('alumnos')
+
             p = PrettyTable()
             print("-- LISTA DE ALUMNOS --".center(80))
             p.field_names = ["ID", "Nombres", "Código", "Edad", "Correo", "Celular", "Dni", "Salon_id"]
 
-            for record in records:
-                p.add_row([record[0], record[1], record[2], record[3], record[4], record[5], record[6], record[7]])
+            for alumnos_alls in data:
+                p.add_row([alumnos_alls["_id"], alumnos_alls["nombres"], alumnos_alls["codigo_alumno"], alumnos_alls["edad"], alumnos_alls["correo"], alumnos_alls["celular"], alumnos_alls["dni"], alumnos_alls["salon_id"]])
             print(p)
         except Exception as e:
             print(e)
     
     def list_all_alumnos(self):
         try:
-            conn = Connection('alumnos')
-            records = conn.select([])
+            conn = Connection('reformatorio')
+            data = conn.get_all('alumnos')
+
             p = PrettyTable()
             print("-- LISTA DE ALUMNOS --".center(80))
             p.field_names = ["ID", "Nombres"]
 
-            for record in records:
-                p.add_row([record[0], record[1]])
+            for alumnos_alls in data:
+                p.add_row([alumnos_alls["_id"], alumnos_alls["nombres"]])
             print(p)
 
         except Exception as e:
@@ -64,7 +66,7 @@ class Alumno:
     def insert_alumnos(self):
         try:
             conn = Connection('reformatorio')
-            conn.insert('alumno', {
+            conn.insert('alumnos', {
                 'nombres': self.nombres,
                 'codigo_alumno': self.codigo_alumno,
                 'edad': self.edad,
@@ -97,9 +99,11 @@ class Alumno:
     
     def delete_alumnos(self):
         try:
-            conn = Connection('alumnos')
-            conn.delete({
-                'id': self.id
+            conn = Connection('reformatorio')
+            conn.delete('alumnos', {
+                'nombres': {
+                    '$gt': self.nombres
+                }
             })
             print(f'Se elimino el usuario.')
         except Exception as e:
