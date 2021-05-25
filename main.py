@@ -104,7 +104,7 @@ class Reformatorio():
         salon_id = input("> ")
 
         update = Alumno(id, nombres, codigo_alumno, edad, correo, celular, dni, salon_id)
-        update.update_profesor()
+        update.update_alumnos()
 
     def data_delete_alumnos(self):
         self.choose_alumno()

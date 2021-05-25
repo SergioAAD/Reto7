@@ -81,9 +81,11 @@ class Alumno:
 
     def update_alumnos(self):
         try:
-            conn = Connection('alumnos')
-            conn.update({
-                'id': self.id
+            conn = Connection('reformatorio')
+            conn.update('alumnos', {
+                'nombres': {
+                    '$lt': self.nombres
+                }
             }, {
                 'nombres': self.nombres,
                 'codigo_alumno': self.codigo_alumno,
@@ -93,7 +95,7 @@ class Alumno:
                 'dni': self.dni,
                 'salon_id': self.salon_id
             })
-            print(f'Se modifico el usuario: {self.nombres} con DNI: {self.dni}')
+            print(f'Se modifico el usuario')
         except Exception as e:
             print(e)
     
