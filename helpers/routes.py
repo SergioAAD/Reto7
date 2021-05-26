@@ -7,3 +7,4 @@ from models.profesor import Profesor
 from models.cursos import Cursos
 from models.grado import Grado
 from models.nivel import Nivel
+from models.periodo import Periodo

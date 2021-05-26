@@ -35,8 +35,8 @@ class Cursos:
         try:
             conn = Connection('reformatorio')
             conn.update('cursos', {
-                'nombre': {
-                    '$lt': self.nombre
+                'id': {
+                    '$ne': self.id
                 }
             }, {
                 'nombre': self.nombre

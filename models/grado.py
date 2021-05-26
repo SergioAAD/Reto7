@@ -21,7 +21,7 @@ class Grado:
             data = conn.get_all('grado')
 
             p = PrettyTable()
-            print("-- LISTA DE CURSOS --".center(80))
+            print("-- LISTA DE GRADOS --".center(80))
             p.field_names = ["ID", "Nombre"]
 
             for value in data:
@@ -35,13 +35,13 @@ class Grado:
         try:
             conn = Connection('reformatorio')
             conn.update('grado', {
-                'nombre': {
-                    '$lt': self.nombre
+                'id': {
+                    '$ne': self.id
                 }
             }, {
                 'nombre': self.nombre
             })
-            print(f'Se modifico el curso')
+            print(f'Se modifico el grado')
         except Exception as e:
             print(e)
 
@@ -53,6 +53,6 @@ class Grado:
                     '$gt': self.nombre
                 }
             })
-            print(f'Se elimino el curso.')
+            print(f'Se elimino el grado.')
         except Exception as e:
             print(e)

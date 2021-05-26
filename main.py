@@ -19,7 +19,8 @@ class Reformatorio():
                 4) Agregar Notas
                 5) Agregar Grado
                 6) Agregar Nivel
-                7) Salir\n
+                7) Agregar Periodo
+                8) Salir\n
             ''')
             opcion = input("> ")
             if opcion == "1":
@@ -35,6 +36,8 @@ class Reformatorio():
                 self.view_grado()
             if opcion == "6":
                 self.view_nivel()
+            if opcion == "7":
+                self.view_periodo()
             else:
                 self.salir()
 
@@ -208,7 +211,7 @@ class Reformatorio():
 
     def choose_cursos(self):
         Cursos.all_cursos("xx")
-        print('''ESCRIBIR EL NOMBRE DEL CURSO A MODIFICAR:''')
+        print('''ESCRIBIR EL ID DEL CURSO A MODIFICAR:''')
     
     def view_cursos(self):
         while True:
@@ -263,7 +266,7 @@ class Reformatorio():
 
     def choose_grado(self):
         Grado.all_grado("xx")
-        print('''ESCRIBIR EL NOMBRE DEL GRADO A MODIFICAR:''')
+        print('''ESCRIBIR EL ID DEL GRADO A MODIFICAR:''')
     
     def view_grado(self):
         while True:
@@ -315,7 +318,7 @@ class Reformatorio():
 
     def choose_nivel(self):
         Nivel.all_nivel("xx")
-        print('''ESCRIBIR EL NOMBRE DEL NIVEL A MODIFICAR:''')
+        print('''ESCRIBIR EL ID DEL NIVEL A MODIFICAR:''')
     
     def view_nivel(self):
         while True:
@@ -368,6 +371,68 @@ class Reformatorio():
         print(''' \\\ CERRADO ///''')
         exit()
 
+# PERIODO
+
+    def choose_periodo(self):
+        Periodo.all_periodo("xx")
+        print('''ESCRIBIR EL ID DEL PERIODO A MODIFICAR:''')
+    
+    def view_periodo(self):
+        while True:
+            print('''
+                Escoga una opción:
+                1) Crear Nuevo
+                2) Modificar Curso
+                3) Eliminar Curso
+                4) Regresar
+                5) Salir\n
+            ''')
+            opcion = input("> ")
+            if opcion == "1":
+                self.add_periodo()
+            elif opcion == "2":
+                self.data_update_periodo()
+            elif opcion == "3":
+                self.data_delete_periodo()
+            elif opcion == "4":
+                self.view_principal()
+            else:
+                self.salir()
+
+    def add_periodo(self):
+        print(''' INGRESAR NUEVO PERIODO:''')
+        nombre = input("> ")
+
+        print(''' INGRESAR AÑO:''')
+        ano = input("> ")
+        
+        insert = Periodo('', nombre, ano)
+        insert.insert_periodo()    
+
+    def data_update_periodo(self):
+        self.choose_periodo()
+        id = input("> ")
+
+        print(''' INGRESAR EL NUEVO NOMBRE DEL PERIODO:''')
+        nombre = input("> ")
+
+        print(''' INGRESAR AÑO:''')
+        ano = input("> ")
+
+        update = Periodo(id, nombre, ano)
+        update.update_periodo()
+
+    def data_delete_periodo(self):
+        self.choose_periodo()
+        id = input("> ")
+        
+        delete = Periodo(id, '', )
+        delete.delete_periodo()
+
+
+    def salir(self):
+        print(''' \\\ CERRADO ///''')
+        exit()
 
 
 Reformatorio()

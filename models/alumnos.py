@@ -63,7 +63,7 @@ class Alumno:
             conn = Connection('reformatorio')
             conn.update('alumnos', {
                 'nombres': {
-                    '$lt': self.nombres
+                    '$ne': self.nombres
                 }
             }, {
                 'nombres': self.nombres,
