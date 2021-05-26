@@ -20,6 +20,17 @@ class Connection:
     def get_one(self, collection, condition={}, select={}):
         collect = self.db[collection]
         return collect.find_one(condition, select)
+    
+    def get_inner(self, collection, condition, select):
+        collect = self.db[collection]
+        return collect.find(condition, {
+            '$lookup' : { 
+                'from': 'profesor',
+                'localField': '_id',
+                'foreignField': 'profesor_id',
+                'as': "dni_profe"
+            }
+        })
 
     # collection = alumnos
     # data => { nombre: 'Carlos', edad: 12, dni: 99999999 }

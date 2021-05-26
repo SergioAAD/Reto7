@@ -13,13 +13,15 @@ class Reformatorio():
         while True:
             print(''' !!! BIENVENIDO A TU REFORMATORIO FAVORITO !!! 
             ¿Que deseas realizar?
-                1) Ver Alumnos
-                2) Ver Docentes
-                3) Administrar Cursos
-                4) Agregar Notas
-                5) Agregar Grado
-                6) Agregar Nivel
-                7) Agregar Periodo
+                1) Alumnos
+                2) Docentes
+                3) Cursos
+                4) Notas
+                5) Grado
+                6) Nivel
+                7) Periodo
+                8) Salon
+                9) Seccion
                 8) Salir\n
             ''')
             opcion = input("> ")
@@ -38,6 +40,10 @@ class Reformatorio():
                 self.view_nivel()
             if opcion == "7":
                 self.view_periodo()
+            if opcion == "8":
+                self.view_salon()
+            if opcion == "9":
+                self.view_seccion()
             else:
                 self.salir()
 
@@ -262,6 +268,24 @@ class Reformatorio():
         delete = Cursos(id, '')
         delete.delete_cursos()
 
+    def data_cursos_profesor(self):
+        self.choose_profesor()
+        profesor_id = input("> ")
+        self.choose_salon()
+        salon_id = input("> ")
+        self.choose_cursos()
+        cursos_id = input("> ")
+
+        insert = CursosDocente('', profesor_id, salon_id, cursos_id)
+        insert.insert_cursos_docente()
+
+    def data_update_cursos(self):
+        self.choose_cursos()
+        id = input("> ")
+
+        print(''' INGRESAR EL NUEVO NOMBRE DEL CURSO:''')
+        nombre = input("> ")
+
 # GRADO
 
     def choose_grado(self):
@@ -313,6 +337,59 @@ class Reformatorio():
         
         delete = Grado(id, '')
         delete.delete_grado()
+
+# SECCION
+
+    def choose_seccion(self):
+        Seccion.all_seccion("xx")
+        print('''ESCRIBIR EL ID DE LA SECCION A MODIFICAR:''')
+    
+    def view_seccion(self):
+        while True:
+            print('''
+                Escoga una opción:
+                1) Crear Nuevo
+                2) Modificar Seccion
+                3) Eliminar Seccion
+                4) Regresar
+                5) Salir\n
+            ''')
+            opcion = input("> ")
+            if opcion == "1":
+                self.add_seccion()
+            elif opcion == "2":
+                self.data_update_seccion()
+            elif opcion == "3":
+                self.data_delete_seccion()
+            elif opcion == "4":
+                self.view_principal()
+            else:
+                self.salir()
+
+    def add_seccion(self):
+        print(''' INGRESAR NUEVO seccion:''')
+        nombre = input("> ")
+        
+        insert = Seccion('', nombre)
+        insert.insert_seccion()    
+
+    def data_update_seccion(self):
+        self.choose_seccion()
+        id = input("> ")
+
+        print(''' INGRESAR EL NUEVO NOMBRE DEL seccion:''')
+        nombre = input("> ")
+
+        update = Seccion(id, nombre)
+        update.update_seccion()
+
+    def data_delete_seccion(self):
+        self.choose_seccion()
+        id = input("> ")
+        
+        delete = Seccion(id, '')
+        delete.delete_seccion()
+
 
 # NIVEL
 
@@ -433,6 +510,68 @@ class Reformatorio():
     def salir(self):
         print(''' \\\ CERRADO ///''')
         exit()
+
+# SALON
+
+    def datos_salon(self):
+        pass
+        # print(''' ESCOGER UN NIVEL:''')
+        # Nivel.all_nivel("xx")
+        # sleep(1)
+        # nivel_id = input("> ")
+
+        # print(''' ESCOGER UN GRADO:''')
+        # Grado.all_grado("xx")
+        # sleep(1)
+        # grado_id = input("> ")
+
+        # print(''' ESCOGER UN SECCIÓN:''')
+        # Seccion.all_seccion("xx")
+        # sleep(1)
+        # seccion_id = input("> ")
+
+        # search = Salon(grado_id, seccion_id, nivel_id)
+        # search.all_salon_xx()
+
+    def choose_salon(self):
+        Salon.all_salon("xx")
+        print('''ESCOGER ID DEL SALON:''')
+    
+    def view_salon(self):
+        while True:
+            print('''
+                Escoga una opción:
+                1) Crear Nuevo
+                2) Modificar Salon
+                3) Eliminar Salon
+                4) Regresar
+                5) Salir\n
+            ''')
+            opcion = input("> ")
+            if opcion == "1":
+                self.add_salon()
+            elif opcion == "2":
+                self.data_update_salon()
+            elif opcion == "3":
+                self.data_delete_salon()
+            elif opcion == "4":
+                self.view_principal()
+            else:
+                self.salir()
+
+    def add_salon(self):
+        print(''' INGRESAR ID DE GRADO:''')
+        grado_id = input("> ")
+
+        print(''' INGRESAR ID DE SECCION:''')
+        seccion_id = input("> ")
+
+        print(''' INGRESAR ID DE NIVEL:''')
+        nivel_id = input("> ")
+        
+        insert = Salon('', grado_id, seccion_id, nivel_id)
+        insert.insert_salon()    
+
 
 
 Reformatorio()

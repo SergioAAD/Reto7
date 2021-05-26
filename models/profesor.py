@@ -7,24 +7,6 @@ class Profesor:
         self.dni = dni
         self.edad = edad
         self.correo = correo
-        
-    # def create_table(self):
-    #     try:
-    #         conn = Connection()
-    #         query = '''
-    #             CREATE TABLE IF NOT EXISTS profesor(
-    #                 id SERIAL PRIMARY KEY NOT NULL,
-    #                 nombre character varying(50) NOT NULL,
-    #                 dni character varying(8) NOT NULL,
-    #                 edad character varying(2) NOT NULL,
-    #                 correo character varying(50) NOT NULL,
-    #             );
-    #         '''
-    #         conn.execute_query(query)
-    #         conn.commit()
-    #     except Exception as e:
-    #         conn.rollback()
-    #         print(e)
 
     def all_profesores(self):
         try:
@@ -43,14 +25,15 @@ class Profesor:
 
     def list_all_profesores(self):
         try:
-            conn = Connection('profesor')
-            records = conn.select([])
+            conn = Connection('reformatorio')
+            data = conn.get_all('profesores')
+            
             p = PrettyTable()
-            print("-- LISTA DE PROFESORES --".center(80))
+            print("-- LISTA DE PROFESORES --".center(50))
             p.field_names = ["ID", "Nombres"]
 
-            for record in records:
-                p.add_row([record[0], record[1]])
+            for record in data:
+                p.add_row([record["_id"], record["nombre"]])
             print(p)
 
         except Exception as e:
@@ -86,16 +69,18 @@ class Profesor:
    
     def update_profesor(self):
         try:
-            conn = Connection('profesor')
-            conn.update({
-                'id': self.id
+            conn = Connection('reformatorio')
+            conn.update('profesores', {
+                'id': {
+                    '$ne': self.id
+                }
             }, {
-                'nombres': self.nombre,
+                'nombre': self.nombre,
                 'dni': self.dni,
                 'edad': self.edad,
-                'correo': self.correo,
+                'correo': self.correo
             })
-            print(f'Se modifico el usuario: {self.nombre} con DNI: {self.dni}')
+            print(f'Se modifico el alumno')
         except Exception as e:
             print(e)
     

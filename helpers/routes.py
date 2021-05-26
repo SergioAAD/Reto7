@@ -8,3 +8,6 @@ from models.cursos import Cursos
 from models.grado import Grado
 from models.nivel import Nivel
 from models.periodo import Periodo
+from models.salon import Salon
+from models.seccion import Seccion
+from models.cursos_docente import CursosDocente
